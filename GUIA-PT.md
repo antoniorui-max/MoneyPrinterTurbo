@@ -6,7 +6,8 @@ O MoneyPrinterTurbo cria vídeos curtos automaticamente: escreve (ou usa) um rot
 
 - Um computador (Windows, Mac ou Linux). Não funciona no telemóvel.
 - **Python 3.11** ou mais recente: https://www.python.org/downloads/ (no Windows, marca "Add Python to PATH" durante a instalação).
-- **Chave da Pexels** (grátis, para os vídeos de fundo): cria conta em https://www.pexels.com/api/ e copia a "API Key".
+- **Chave da Pixabay** (grátis, para os vídeos de fundo): cria conta em https://pixabay.com/accounts/register/, depois abre https://pixabay.com/api/docs/ e copia a chave que aparece a verde em "Parameters → key".
+  (A Pexels também funciona, mas em outubro de 2026 tinha a emissão de chaves novas pausada.)
 - **Chave de IA** para escrever roteiros sozinho (opcional se fores tu a escrever o roteiro). A mais fácil e com plano grátis é a do **Google Gemini**: https://aistudio.google.com/app/apikey
 - A voz (Edge TTS) é grátis e não precisa de chave.
 
@@ -34,7 +35,7 @@ Abre-se uma página no navegador. Na primeira vez:
 1. Em cima, muda o idioma da interface (se aparecer em chinês, procura o menu de idioma e escolhe English).
 2. Abre as **definições básicas** e:
    - em **LLM Provider** escolhe **Gemini** e cola a tua chave;
-   - em **Pexels API Key** cola a chave da Pexels;
+   - em **Video Source** escolhe **Pixabay** e cola a chave da Pixabay;
    - guarda.
 
 ## 4. Definições recomendadas para o teu perfil (autossuperação)
@@ -67,10 +68,10 @@ O vídeo pronto fica na pasta `storage/tasks/`.
 
 ## 6. Criar 5 vídeos de uma vez
 
-O ficheiro [`exemplos/autossuperacao.json`](exemplos/autossuperacao.json) tem 5 roteiros de autossuperação prontos ("Ninguém acreditava em mim", "Se estás a pensar em desistir…", "3 coisas que aprendi quando perdi tudo", etc.). Com a chave da Pexels configurada, corre:
+O ficheiro [`exemplos/autossuperacao.json`](exemplos/autossuperacao.json) tem 5 roteiros de autossuperação prontos ("Ninguém acreditava em mim", "Se estás a pensar em desistir…", "3 coisas que aprendi quando perdi tudo", etc.). Com a chave da Pixabay configurada, corre:
 
 ```shell
-uv run python cli.py --batch-file exemplos/autossuperacao.json --video-language pt-PT --voice-name pt-PT-DuarteNeural-Male --font-name BeVietnamPro-Bold.ttf --font-size 75 --subtitle-position center --subtitle-display-mode word_by_word --subtitle-animation pop_spring --video-clip-duration 3
+uv run python cli.py --batch-file exemplos/autossuperacao.json --video-source pixabay --video-language pt-PT --voice-name pt-PT-DuarteNeural-Male --font-name BeVietnamPro-Bold.ttf --font-size 75 --subtitle-position center --subtitle-display-mode word_by_word --subtitle-animation pop_spring --video-clip-duration 3
 ```
 
 Como os roteiros já estão escritos, isto nem precisa da chave de IA. Podes editar o ficheiro e trocar os textos pelos teus.
@@ -84,7 +85,7 @@ Como os roteiros já estão escritos, isto nem precisa da chave de IA. Podes edi
 
 ## Problemas comuns
 
-- **"Pexels API key" em falta:** volta às definições básicas e cola a chave.
+- **Chave em falta (Pixabay/Pexels):** volta às definições básicas, confirma que a fonte de vídeo é Pixabay e cola a chave.
 - **Letras estranhas nas legendas:** muda a fonte para BeVietnamPro-Bold.ttf.
 - **Erro de LLM:** confirma a chave do Gemini, ou cola o roteiro tu mesmo.
 - Ficheiro `config.toml`: é onde ficam as tuas chaves. **Nunca o envies para o GitHub.** (já está protegido no `.gitignore`)
